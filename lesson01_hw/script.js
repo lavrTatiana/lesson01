@@ -1,12 +1,5 @@
-let num = 266219;
-let result = 1;
-let rest = num;
-let i = num.toString().length;
-for (; i !== 0; i--) {
-  number = Math.trunc(rest / Math.pow(10, (i - 1)));
-  rest -= (number * Math.pow(10, (i - 1)));
-  result *= number;
-}
+let num = 266219, 
+  result = num.toString().split('').reduce((r, n) => r * n, 1);
 
 console.log(result);
 
