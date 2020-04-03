@@ -1,7 +1,7 @@
 let money = +prompt('What is your monthly income?'),
   addExpenses = prompt('List the possible expenses for the calculated period, separated by commas'),
   income = 'project design work',
-  deposit = prompt("Do you have a deposit at the bank? Please, write 'yes' or 'no'"), 
+  deposit = confirm("Do you have a deposit at the bank? Please, write 'yes' or 'no'"), 
   mission = 400000,
   arr = addExpenses.toLowerCase().split(','),
   expenses1 = prompt('Enter a required expense'),
@@ -13,15 +13,8 @@ let money = +prompt('What is your monthly income?'),
   period = Math.ceil(mission / budgetMonth);
   
 
-// Boolean for deposit
-if (deposit == 'yes') {
-  deposit = true;
-} else {
-  deposit = false; 
-}
-
 // constraction fot budgetDay
-switch (budgetDay) {
+switch (true) {
   case (budgetDay >= 1200):
     console.log('You have high income');
     break;
