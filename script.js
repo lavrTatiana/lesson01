@@ -1,15 +1,72 @@
-let money = +prompt('What is your monthly income?'),
+let isNumber = function(n) {
+  return (!isNaN(parseFloat(n)) && isFinite(n));
+}
+
+let money,
   addExpenses = prompt('List the possible expenses for the calculated period, separated by commas'),
   income = 'project design work',
   deposit = confirm('Do you have a deposit at the bank?'), 
   mission = 400000,
   arrAddExpenses = addExpenses.toLowerCase().split(','),
-  expenses1 = prompt('Enter a required expense'),
-  amount1 = parseFloat(prompt('How much does it cost?')),
-  expenses2 = prompt('Enter a required expense'),
-  amount2 = parseFloat(prompt('How much does it cost?')), 
-  accumulatedMonth = getAccumulatedMonth(money, getExpensesMonth(amount1, amount2)),
-  budgetDay = accumulatedMonth / 30;
+  expenses = [],
+  targetMonth,
+  responseOnDeadline,
+  accumulatedMonth,
+  budgetDay;
+
+
+// Enter sum of money
+function start() {
+  do {
+    money = prompt('What is your monthly income?');
+  }
+  while (!isNumber(money));
+  return (money*1);
+}
+
+// Enter the expenses
+let expensesMonth = getExpensesMonth();
+
+function getExpensesMonth() {
+  let sumOfExpenses = 0;
+  
+  for (let i = 0; i < 2; i++) {
+    expenses[i] = prompt('Enter a required expense');
+    sumOfExpenses += +prompt('How much does it cost?');
+  }
+  return (sumOfExpenses);
+}
+
+// Accumulate sum of the expenses
+accumulatedMonth = getAccumulatedMonth(start(), expensesMonth);
+budgetDay = accumulatedMonth / 30;
+
+// Net profit
+function getAccumulatedMonth(arg1, arg2) {
+  return (arg1 - arg2);
+}
+
+// Goal achievement period 
+function getTargetMonth(arg1, arg2) {
+  targetMonth = Math.ceil(arg1 / arg2);
+  return (targetMonth);
+}
+
+function respondOnDeadline(targetMonth) {
+  if (targetMonth > 0) {
+    responseOnDeadline = ('The mission will be achieved in ' + targetMonth + ' month(s)');
+  } else if (targetMonth === 0) {
+    responseOnDeadline = ('The mission will be achieved in this month');
+  } else {
+    responseOnDeadline = ('Unfortunately, under these conditions, the mission will not be achieved');
+  }
+  return (responseOnDeadline);
+}
+
+// Typeof function
+function showTypeOf(data) {
+  return (typeof (data));
+}
 
 // Income status
 function getStatusIncome(arg1){
@@ -26,32 +83,13 @@ function getStatusIncome(arg1){
     return ('Something wrong');
   }
 }
-// Sum of the expenses
-function getExpensesMonth(arg1, arg2){
-  return  (arg1 + arg2);
-}
-
-// Net profit
-function getAccumulatedMonth(arg1, arg2) {
-  return (arg1 - arg2);
-}
-
-// Goal achievement period 
-function getTargetMonth(arg1, arg2){
-  return (Math.ceil(arg1 / arg2));
-}
-
-// Typeof function
-function showTypeOf(data){
-  return (typeof (data));
-}
 
 
 console.log(showTypeOf(money));
 console.log(showTypeOf(income));
 console.log(showTypeOf(deposit));
-console.log(getExpensesMonth(amount1, amount2));
+console.log('Monthly expenses are ' + expensesMonth);
 console.log(arrAddExpenses);
-console.log(getTargetMonth(mission, accumulatedMonth) + 'months');
+console.log(respondOnDeadline(getTargetMonth(mission, accumulatedMonth)));
 console.log(Math.floor(budgetDay));
 console.log(getStatusIncome(budgetDay));
