@@ -39,6 +39,8 @@ function getExpensesMonth() {
 
 // Accumulate sum of the expenses
 accumulatedMonth = getAccumulatedMonth(start(), expensesMonth);
+
+// Accumulate budget per day
 budgetDay = accumulatedMonth / 30;
 
 // Net profit
