@@ -30,25 +30,27 @@ let appData = {
       let addExpenses = prompt('List the possible expenses for the calculated period, separated by commas');
       appData.addExpenses = addExpenses.toLowerCase().split(',');
       appData.deposit = confirm('Do you have a deposit at the bank?');
+      
+      for (let i = 0; i < 2; i++) {
+        appData.expenses[prompt('Enter a required expense')] =+prompt('How much does it cost?');
+      }
     },
 
     getExpensesMonth: function() {
-      let sumOfExpenses = 0;
-      
-      for (let i = 0; i < 2; i++) {
-        appData.expenses[i] = prompt('Enter a required expense');
-        sumOfExpenses += +prompt('How much does it cost?');
+      let sumOfExpenses = 0;  
+      for (let key in appData.expenses){
+        sumOfExpenses += appData.expenses[key];
       }
-      return (sumOfExpenses);
+      return sumOfExpenses;
     },
 
-    getAccumulatedMonth: function(arg1, arg2) {
+    getBudget: function(arg1, arg2) {
       return (arg1 - arg2);
     },
 
     getTargetMonth: function(arg1, arg2) {
-      targetMonth = Math.ceil(arg1 / arg2);
-      return (targetMonth);
+      appData.period = Math.ceil(arg1 / arg2);
+      return (appData.period);
     },
     
     getStatusIncome: function(arg1){
@@ -74,16 +76,16 @@ appData.asking();
 appData.expensesMonth = appData.getExpensesMonth();
 
 // Accumulate sum of the expenses
-appData.budgetMonth = appData.getAccumulatedMonth(money, appData.expensesMonth);
+appData.budgetMonth = appData.getBudget(money, appData.expensesMonth);
 
 // Accumulate budget per day
 appData.budgetDay = appData.budgetMonth / 30;
 
 function respondOnDeadline(targetMonth) {
   let responseOnDeadline;
-  if (targetMonth > 0) {
+  if (targetMonth > 0 && targetMonth != 1) {
     responseOnDeadline = ('The mission will be achieved in ' + targetMonth + ' month(s)');
-  } else if (targetMonth === 0) {
+  } else if (targetMonth === 1) {
     responseOnDeadline = ('The mission will be achieved in this month');
   } else {
     responseOnDeadline = ('Unfortunately, under these conditions, the mission will not be achieved');
@@ -93,7 +95,5 @@ function respondOnDeadline(targetMonth) {
 
 
 console.log('Monthly expenses are ' + appData.expensesMonth);
-console.log(appData.addExpenses);
 console.log(respondOnDeadline(appData.getTargetMonth(appData.mission, appData.budgetMonth)));
-console.log(Math.floor(appData.budgetDay));
 console.log(appData.getStatusIncome(appData.budgetDay));
