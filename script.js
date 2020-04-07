@@ -3,58 +3,84 @@ let isNumber = function(n) {
 }
 
 let money,
-  addExpenses = prompt('List the possible expenses for the calculated period, separated by commas'),
-  income = 'project design work',
-  deposit = confirm('Do you have a deposit at the bank?'), 
-  mission = 400000,
-  arrAddExpenses = addExpenses.toLowerCase().split(','),
-  expenses = [],
-  targetMonth,
-  responseOnDeadline,
-  accumulatedMonth,
-  budgetDay;
+    start = function() {
+      do {
+        money = prompt('What is your monthly income?');
+      }
+      while (!isNumber(money));
+      return (money*1);
+    }
 
 
-// Enter sum of money
-function start() {
-  do {
-    money = prompt('What is your monthly income?');
-  }
-  while (!isNumber(money));
-  return (money*1);
+let appData = {
+    budget: money,
+    income: {},
+    addIncome: [],
+    expenses: {},
+    addExpenses: [],
+    deposit: false,
+    mission: 400000,
+    period: 3,
+    budgetDay: 0,
+    budgetMonth: 0,
+    expensesMonth: 0,
+    targetMonth: 0,
+
+    asking: function() {
+      let addExpenses = prompt('List the possible expenses for the calculated period, separated by commas');
+      appData.addExpenses = addExpenses.toLowerCase().split(',');
+      appData.deposit = confirm('Do you have a deposit at the bank?');
+    },
+
+    getExpensesMonth: function() {
+      let sumOfExpenses = 0;
+      
+      for (let i = 0; i < 2; i++) {
+        appData.expenses[i] = prompt('Enter a required expense');
+        sumOfExpenses += +prompt('How much does it cost?');
+      }
+      return (sumOfExpenses);
+    },
+
+    getAccumulatedMonth: function(arg1, arg2) {
+      return (arg1 - arg2);
+    },
+
+    getTargetMonth: function(arg1, arg2) {
+      targetMonth = Math.ceil(arg1 / arg2);
+      return (targetMonth);
+    },
+    
+    getStatusIncome: function(arg1){
+      if (arg1 >= 1200){
+        return ('You have high income');
+      }
+      else if (arg1 >= 600 && arg1 < 1200){
+        return ('You have average income');
+      }
+      else if (arg1 < 600 && arg1 >= 0){
+        return ('Unfortunately, your income is below average');
+      }
+      else {
+        return ('Something wrong');
+      }
+    }
 }
+
+start();
+appData.asking();
 
 // Enter the expenses
-let expensesMonth = getExpensesMonth();
-
-function getExpensesMonth() {
-  let sumOfExpenses = 0;
-  
-  for (let i = 0; i < 2; i++) {
-    expenses[i] = prompt('Enter a required expense');
-    sumOfExpenses += +prompt('How much does it cost?');
-  }
-  return (sumOfExpenses);
-}
+appData.expensesMonth = appData.getExpensesMonth();
 
 // Accumulate sum of the expenses
-accumulatedMonth = getAccumulatedMonth(start(), expensesMonth);
+appData.budgetMonth = appData.getAccumulatedMonth(money, appData.expensesMonth);
 
 // Accumulate budget per day
-budgetDay = accumulatedMonth / 30;
-
-// Net profit
-function getAccumulatedMonth(arg1, arg2) {
-  return (arg1 - arg2);
-}
-
-// Goal achievement period 
-function getTargetMonth(arg1, arg2) {
-  targetMonth = Math.ceil(arg1 / arg2);
-  return (targetMonth);
-}
+appData.budgetDay = appData.budgetMonth / 30;
 
 function respondOnDeadline(targetMonth) {
+  let responseOnDeadline;
   if (targetMonth > 0) {
     responseOnDeadline = ('The mission will be achieved in ' + targetMonth + ' month(s)');
   } else if (targetMonth === 0) {
@@ -65,33 +91,9 @@ function respondOnDeadline(targetMonth) {
   return (responseOnDeadline);
 }
 
-// Typeof function
-function showTypeOf(data) {
-  return (typeof (data));
-}
 
-// Income status
-function getStatusIncome(arg1){
-  if (arg1 >= 1200){
-    return ('You have high income');
-  }
-  else if (arg1 >= 600 && arg1 < 1200){
-    return ('You have average income');
-  }
-  else if (arg1 < 600 && arg1 >= 0){
-    return ('Unfortunately, your income is below average');
-  }
-  else {
-    return ('Something wrong');
-  }
-}
-
-
-console.log(showTypeOf(money));
-console.log(showTypeOf(income));
-console.log(showTypeOf(deposit));
-console.log('Monthly expenses are ' + expensesMonth);
-console.log(arrAddExpenses);
-console.log(respondOnDeadline(getTargetMonth(mission, accumulatedMonth)));
-console.log(Math.floor(budgetDay));
-console.log(getStatusIncome(budgetDay));
+console.log('Monthly expenses are ' + appData.expensesMonth);
+console.log(appData.addExpenses);
+console.log(respondOnDeadline(appData.getTargetMonth(appData.mission, appData.budgetMonth)));
+console.log(Math.floor(appData.budgetDay));
+console.log(appData.getStatusIncome(appData.budgetDay));
