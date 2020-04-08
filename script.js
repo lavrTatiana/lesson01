@@ -93,6 +93,9 @@ function respondOnDeadline(targetMonth) {
   return (responseOnDeadline);
 }
 
+for (let key in appData) {
+  console.log('This program includes data: ' + key + appData[key]);
+}
 
 console.log('Monthly expenses are ' + appData.expensesMonth);
 console.log(respondOnDeadline(appData.getTargetMonth(appData.mission, appData.budgetMonth)));
