@@ -1,14 +1,9 @@
-let isNumber = function(n) {
-  return (!isNaN(parseFloat(n)) && isFinite(n));
-}
-
 let money,
     start = function() {
       do {
         money = prompt('What is your monthly income?');
       }
-      while (!isNumber(money));
-      return (money*1);
+      while (isNan(money) || money === '' || money === null);
     }
 
 
