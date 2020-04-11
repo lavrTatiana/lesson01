@@ -26,8 +26,16 @@ let appData = {
     asking: function() {
 
       if (confirm('Do you have an extra income?')) {
-        let itemIncome = prompt('What kind of the extra income do you have?');
-        let cashIncome = prompt('How much you earn on this?');
+        let itemIncome;
+        let cashIncome;
+        do {
+          itemIncome = prompt('What kind of the extra income do you have?');
+        }
+        while (!String(itemIncome));
+        do {
+          cashIncome = prompt('How much you earn on this?');
+        }
+        while (isNaN(cashIncome) || cashIncome === '' || cashIncome === null);
         appData.income[itemIncome] = cashIncome;
       }
 
@@ -37,7 +45,12 @@ let appData = {
       
       for (let i = 0; i < 2; i++) {
 
-        let itemExpenses = prompt('Enter a required expense');
+        let itemExpenses;
+        do {
+          itemExpenses = prompt('Enter a required expense');
+        }
+        while (!String(itemExpenses));
+        
         let cashExpenses;
         do {
           cashExpenses = prompt('How much does it cost?');
@@ -49,7 +62,6 @@ let appData = {
     },
 
     getExpensesMonth: function() {
-      let sumOfExpenses = 0;  
       for (let key in appData.expenses){
         appData.expensesMonth += +appData.expenses[key];
       }
@@ -81,8 +93,15 @@ let appData = {
 
     getInfoDeposit: function() {
       if (appData.deposit) {
-        appData.persentDeposit = prompt('What is the annual percentage?');
-        appData.moneyDeposit = prompt('How much is deposited in the account?')
+        do {
+          appData.persentDeposit = prompt('What is the annual percentage?');
+        }
+        while (!String(appData.persentDeposit));
+        do {
+        appData.moneyDeposit = prompt('How much is deposited in the account?');
+        }
+        while (isNaN(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
+
       }
     },
 
@@ -95,6 +114,8 @@ let appData = {
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
+appData.getInfoDeposit();
+
 
 
 function respondOnDeadline() {
@@ -118,3 +139,8 @@ for (let key in appData) {
   console.log('This program includes data: ' + key + '-' + appData[key]);
 }
 
+let ans = '';
+for (let word of appData.addExpenses) {
+  ans += (word[0].toUpperCase() + word.slice(1) + ', ');
+} 
+console.log(ans.slice(0, -2));
