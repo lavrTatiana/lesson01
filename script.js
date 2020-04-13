@@ -41,6 +41,10 @@ console.log(targetAmount);
 console.log(periodSelect);
 
 
+// let isNumber = function(n) {
+//   return (!isNaN(parseFloat(n)) && isFinite(n));
+// }
+
 // let money,
 //     start = function() {
 //       do {
@@ -50,7 +54,6 @@ console.log(periodSelect);
 //     }
 
 // start();
-
 
 // let appData = {
 //     budget: money,
@@ -75,7 +78,7 @@ console.log(periodSelect);
 //         do {
 //           itemIncome = prompt('What kind of the extra income do you have?');
 //         }
-//         while (!String(itemIncome));
+//         while (isNumber(itemIncome) || itemIncome === '' || itemIncome === null);
 //         do {
 //           cashIncome = prompt('How much you earn on this?');
 //         }
@@ -93,7 +96,7 @@ console.log(periodSelect);
 //         do {
 //           itemExpenses = prompt('Enter a required expense');
 //         }
-//         while (!String(itemExpenses));
+//         while (isNumber(itemExpenses) || itemExpenses === '' || itemExpenses === null);
         
 //         let cashExpenses;
 //         do {
@@ -140,7 +143,7 @@ console.log(periodSelect);
 //         do {
 //           appData.persentDeposit = prompt('What is the annual percentage?');
 //         }
-//         while (!String(appData.persentDeposit));
+//         while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
 //         do {
 //         appData.moneyDeposit = prompt('How much is deposited in the account?');
 //         }
@@ -188,3 +191,4 @@ console.log(periodSelect);
 //   ans += (word[0].toUpperCase() + word.slice(1) + ', ');
 // } 
 // console.log(ans.slice(0, -2));
+
