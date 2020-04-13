@@ -1,3 +1,7 @@
+let isNumber = function(n) {
+  return (!isNaN(parseFloat(n)) && isFinite(n));
+}
+
 let money,
     start = function() {
       do {
@@ -31,7 +35,7 @@ let appData = {
         do {
           itemIncome = prompt('What kind of the extra income do you have?');
         }
-        while (!String(itemIncome));
+        while (isNumber(itemIncome) || itemIncome === '' || itemIncome === null);
         do {
           cashIncome = prompt('How much you earn on this?');
         }
@@ -49,7 +53,7 @@ let appData = {
         do {
           itemExpenses = prompt('Enter a required expense');
         }
-        while (!String(itemExpenses));
+        while (isNumber(itemExpenses) || itemExpenses === '' || itemExpenses === null);
         
         let cashExpenses;
         do {
@@ -96,7 +100,7 @@ let appData = {
         do {
           appData.persentDeposit = prompt('What is the annual percentage?');
         }
-        while (!String(appData.persentDeposit));
+        while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
         do {
         appData.moneyDeposit = prompt('How much is deposited in the account?');
         }
