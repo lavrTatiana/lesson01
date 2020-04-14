@@ -143,7 +143,7 @@ console.log(periodSelect);
 //         do {
 //           appData.persentDeposit = prompt('What is the annual percentage?');
 //         }
-//         while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
+//         while (isNaN(appData.persentDeposit) || appData.persentDeposit === '' || appData.persentDeposit === null);
 //         do {
 //         appData.moneyDeposit = prompt('How much is deposited in the account?');
 //         }
