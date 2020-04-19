@@ -67,7 +67,7 @@ let appData = {
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcSavedMoney();
-      periodSelect.addEventListener('change', function() {
+      periodSelect.addEventListener('input', function() {
         incomePeriodValue.value=appData.calcSavedMoney();
       });
       
@@ -193,6 +193,7 @@ let appData = {
 let clicked = function() {
   if(salaryAmount.value === '') {
     buttonCalculate.removeEventListener('click', alert ('Ошибка, поле "Месячный доход" должно быть заполнено!'));
+    return;
   }
 
   appData.start();
@@ -206,7 +207,7 @@ incomePlus.addEventListener('click', appData.addIncomeBlock);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
 // Отклик на range, изменение численного значения
-periodSelect.addEventListener('change', function() {
+periodSelect.addEventListener('input', function() {
   periodAmount.textContent = periodSelect.value;
 }, false);
 
