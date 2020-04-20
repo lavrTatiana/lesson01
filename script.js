@@ -92,15 +92,24 @@ let appData = {
         input.removeAttribute('readonly');
       });
 
+      incomePlus.disabled = false;
+      expensesPlus.disabled = false;
+
       incomePlus.style.display = 'block';
       expensesPlus.style.display = 'block';
-
-      buttonCalculate.disabled = true;
+      
       buttonCalculate.style.display = 'block';
       buttonCancel.style.display = 'none';
 
       incomeItems = document.querySelectorAll('.income-items');
-      incomeItems.forEach((item, index) => {
+      incomeItems.forEach(function(item, index) {
+        if (index !== 0) {
+          item.remove();
+        }
+      });
+
+      expensesItems = document.querySelectorAll('.expenses-items');
+      expensesItems.forEach(function(item, index) {
         if (index !== 0) {
           item.remove();
         }
