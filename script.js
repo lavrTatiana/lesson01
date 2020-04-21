@@ -274,8 +274,8 @@ AppData.prototype.eventEventListeners = function () {
   
   console.log(this);
   // Кнопка запуска и сброса
-  buttonCalculate.addEventListener('click', this.start);
-  buttonCancel.addEventListener('click', this.reset);
+  buttonCalculate.addEventListener('click', this.start.bind(this));
+  buttonCancel.addEventListener('click', this.reset.bind(this));
   
   // Отклик кнопок Plus
   incomePlus.addEventListener('click', this.addIncomeBlock);
