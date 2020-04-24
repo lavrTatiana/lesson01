@@ -72,7 +72,7 @@ class AppData {
     // Фиксирование input, появление кнопки Cancel
     let textInput = calculateForm.querySelectorAll('.data input[type="text"]');
     let textData = Array.prototype.slice.call(textInput);
-    textData.forEach(function(input) {
+    textData.forEach((input) => {
       input.setAttribute('readonly', true);
     });
       
@@ -99,7 +99,7 @@ class AppData {
   
     let calcInputs = calculateForm.querySelectorAll('input');
     let calcArray = Array.prototype.slice.call(calcInputs);
-    calcArray.forEach(function(input){
+    calcArray.forEach((input) => {
       input.value = '';
       input.removeAttribute('readonly');
     });
@@ -114,14 +114,14 @@ class AppData {
     buttonCancel.style.display = 'none';
   
     incomeItems = document.querySelectorAll('.income-items');
-    incomeItems.forEach(function(item, index) {
+    incomeItems.forEach((item, index) => {
       if (index !== 0) {
         item.remove();
       }
     });
   
     expensesItems = document.querySelectorAll('.expenses-items');
-    expensesItems.forEach(function(item, index) {
+    expensesItems.forEach((item, index) => {
       if (index !== 0) {
         item.remove();
       }
@@ -156,7 +156,7 @@ class AppData {
 
   getExpenses() {
     const _this = this;
-    expensesItems.forEach(function(item){
+    expensesItems.forEach((item) => {
       let itemExpenses = item.querySelector('.expenses-title').value;
       let cashExpenses = item.querySelector('.expenses-amount').value;
   
@@ -178,7 +178,7 @@ class AppData {
 
   getIncome() {
     const _this = this;
-    incomeItems.forEach(function(item){
+    incomeItems.forEach((item) => {
       let itemIncome = item.querySelector('.income-title').value;
       let cashIncome = item.querySelector('.income-amount').value;
   
@@ -195,7 +195,7 @@ class AppData {
   getAddExpenses() {
     let addExpenses = additionalExpensesItem.value.split(',');
     const _this = this;
-    addExpenses.forEach(function(item) {
+    addExpenses.forEach((item) => {
       item = item.trim();
       if (item !== ''){
         _this.addExpenses.push(item);
@@ -205,7 +205,7 @@ class AppData {
 
   getAddIncome() {
     const _this = this;
-    additionalIncomeItem.forEach(function(item) {
+    additionalIncomeItem.forEach((item) => {
       let itemValue = item.value.trim();
       if (itemValue !== '') {
         _this.addIncome.push(itemValue);
@@ -283,13 +283,6 @@ const appData = new AppData();
 appData.eventEventListeners();
 
 console.log(appData);
-
-
-
-
-
-
-
 
 
 // document.querySelectorAll('input[type=text]').disabled = true;
