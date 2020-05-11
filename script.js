@@ -1,7 +1,7 @@
 'use strict';
 
 const daysWeek = document.querySelector('.days-week');
-let date = new Date(''),
+let date = new Date('17 may 2020'),
     day = date.getDay();
 
 const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
@@ -12,12 +12,14 @@ week.forEach((item, index) => {
   
   daysWeek.append(newDay);
   newDay.textContent = item;
+  console.log(day);
+  
     
   if (index === 5 || index === 6) {
-    newDay.style.cssText = 'font-size: 2rem; font-weight: bold';
+    newDay.style.cssText = 'font-size: 2rem; font-style: italic';
   } 
   if (index === (day - 1)) {
-    newDay.style.cssText = 'font-size: 2rem; font-style: italic';
+    newDay.style.cssText = 'font-size: 2rem; font-weight: bold';
   }
   if ((index === 6 && day === 0) || (index === 5 && day === 6)) {
     newDay.style.cssText = 'font-size: 2rem; font-style: italic; font-weight: bold;';
