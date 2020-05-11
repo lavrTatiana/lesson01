@@ -1,7 +1,7 @@
 'use strict';
 
 const daysWeek = document.querySelector('.days-week');
-let date = new Date('17 may 2020'),
+let date = new Date(),
     day = date.getDay();
 
 const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
